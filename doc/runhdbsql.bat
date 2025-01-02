@@ -1,0 +1,1 @@
+"C:\Program Files\SAP\hdbclient\hdbsql.exe" -U YOURUSERSECSTORE -I "C:\Temp\script01.sql" -a -f -C -x -resultencoding UTF8 -o "C:\Temp\result.csv"
