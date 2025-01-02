@@ -5,8 +5,12 @@
 
 Пример <cmdfile_name> :
 ``SELECT * FROM "SAPBWP"."/BI0/TPLANT" WHERE objvers = 'A';``
+
 4) Подключиться к HANA db из командной строки и выполнить командный файл:
-``hdbsql -n <host> -i <instance> -u <database_user> -p <database_user_password> -d <database_name> -o <outputfile_name> -F ; -I <cmd_file_name> -quiet -a -x -g ? -p -q <outputfile_name> ``
+```
+hdbsql -n <host> -i <instance> -u <database_user> -p <database_user_password> -d <database_name> -o <outputfile_name> -F ; -I <cmd_file_name> -quiet -a -x -g ? -p -q <outputfile_name>
+```
+
 будет содержать результат выполнения команд из командного файла, без заголовков (благодаря опции -a) с разделителем ; (благодаря
 опции -F) и без welcome-banner (благодаря опции -quiet) и информации о кол-ве выгруженных строк (благодаря опции -x). Вместо null-значений будет
 выгружаться знак ? (благодаря опции -g).
