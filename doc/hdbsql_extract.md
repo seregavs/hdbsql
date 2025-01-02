@@ -18,7 +18,8 @@ hdbsql -n <host> -i <instance> -u <database_user> -p <database_user_password> -d
 Дополнительно, нужно подавить символ начала строки (благодаря опции -p) и конца строки (опция -q). Скрипт в cmdfile_name можно параметризировать
 через переменные, которые передавать через опцию -V. -C убирает " вокруг строк (важно для генерации SQL запросов)
 [Подробнее про командные опции](https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/c24d054bbb571014b253ac5d6943b5bd.html?locale=en-US&version=2.0.03)
-Дополнительно
+
+Дополнительно:
 * Пароль можно не передавать открытым текстом, если настроено SSO с HANA DB или Secure User Store.
 * Можно формировать командные файлы для запуска с уровня ОС. И запускать их, например, из цепочек процессов или с рабочих станций пользователей.
 
@@ -47,3 +48,15 @@ SELECT TOP 6 HOST,PORT,SCHEMA_NAME,TABLE_NAME,PART_ID,MEMORY_SIZE_IN_TOTAL
 ```
 Чтобы пара логин-пароль отсутствовала в файле запуска, можно создать на хосте, откуда выполняется запуск, т.н. secure user store и использовать в тексте
 скрипта ключ (KEY) вместо пары USER/PASSWORD
+
+```
+@echo off
+"C:\Program Files\SAP\hdbclient\hdbsql.exe" -n hana_host -i 20 -U <KEY> -d <HANA_Tenant> -I "C:\Users\<...>\Documents\script01.sql" -a -x -o "c:\Temp\output01.txt"
+pause
+```
+
+Для создания ключа выполняем
+``"C:\Program Files\SAP\hdbclient\hdbuserstore" SET <KEY> "sapbhpm.office.lenta.com:32013@BHD" <USER> <PASSWORD>``
+
+Для просмотра параметров подключения для данного KEY (без демонстрации пароля) выполняем
+``"C:\Program Files\SAP\hdbclient\hdbuserstore" LIST <KEY>``
